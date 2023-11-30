@@ -19,7 +19,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
 
   const lists = await db.list.findMany({
     where: {
-      id: params.boardId,
+      boardId: params.boardId,
       board: {
         orgId,
       },
@@ -35,6 +35,8 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
       order: "asc",
     },
   });
+
+  console.log("lists", lists)
 
   return (
     <div className="p-4 h-full overflow-x-auto">
