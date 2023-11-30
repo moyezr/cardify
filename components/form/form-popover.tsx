@@ -19,6 +19,8 @@ import FormInput from "./form-input";
 import FormSubmit from "./form-submit";
 import { X } from "lucide-react";
 import { toast } from "sonner"
+import FormPicker from "./form-picker";
+import { createBoard } from "@/actions/create-board";
 
 const FormPopover = ({
   children,
@@ -37,7 +39,7 @@ const FormPopover = ({
     },
     onError: (error) => {
       toast.error(error);
-      proModal.onOpen();
+      // proModal.onOpen();
     },
   });
 
