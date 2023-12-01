@@ -21,7 +21,7 @@ interface ListOptionsProps {
   onAddCard: () => void;
 }
 
-const ListOptions = ({ data }: ListOptionsProps) => {
+const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
 
   const { execute: executeDelete } = useAction(deleteList, {
@@ -84,7 +84,7 @@ const ListOptions = ({ data }: ListOptionsProps) => {
           </Button>
         </PopoverClose>
         <Button
-          onClick={() => {}}
+          onClick={onAddCard }
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           variant={"ghost"}
         >
