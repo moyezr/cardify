@@ -36,7 +36,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
     },
   });
 
-  console.log("lists", lists)
+  // console.log("lists", lists)
 
   return (
     <div className="p-4 h-full overflow-x-auto">
