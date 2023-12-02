@@ -9,6 +9,8 @@ import { createSafeAction } from "@/lib/create-safe-action";
 
 import { CopyList } from "./schema";
 import { InputType, ReturnType } from "./types";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
+import { createAuditLog } from "@/lib/create-audit-log";
 // import { createAuditLog } from "@/lib/create-audit-log";
 // import { ACTION, ENTITY_TYPE } from "@prisma/client";
 // import { decreaseAvailableCount } from "@/lib/org-limit";
@@ -77,12 +79,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     //   await decreaseAvailableCount();
     // }
 
-    // await createAuditLog({
-    //   entityTitle: list.title,
-    //   entityId: list.id,
-    //   entityType: ENTITY_TYPE.list,
-    //   action: ACTION.DELETE,
-    // })
+    await createAuditLog({
+      entityTitle: list.title,
+      entityId: list.id,
+      entityType: ENTITY_TYPE.LIST,
+      action: ACTION.DELETE,
+    })
   } catch (error) {
     return {
       error: "Failed to Copy List.",

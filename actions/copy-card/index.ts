@@ -9,6 +9,8 @@ import { createSafeAction } from "@/lib/create-safe-action";
 
 import { CopyCard } from "./schema";
 import { InputType, ReturnType } from "./types";
+import { createAuditLog } from "@/lib/create-audit-log";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 // import { createAuditLog } from "@/lib/create-audit-log";
 // import { ACTION, ENTITY_TYPE } from "@prisma/client";
 // import { decreaseAvailableCount } from "@/lib/org-limit";
@@ -63,6 +65,13 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         order: newOrder,
         listId: cardToCopy.listId
       }
+    })
+
+    await createAuditLog({
+      action: ACTION.CREATE,
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: ENTITY_TYPE.CARD
     })
   } catch (error) {
     return {
