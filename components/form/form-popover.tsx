@@ -21,6 +21,7 @@ import { X } from "lucide-react";
 import { toast } from "sonner"
 import FormPicker from "./form-picker";
 import { createBoard } from "@/actions/create-board";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const FormPopover = ({
   children,
@@ -28,6 +29,7 @@ const FormPopover = ({
   align,
   sideOffset = 0,
 }: FormPopoverProps) => {
+  const proModal = useProModal();
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
 
@@ -39,7 +41,7 @@ const FormPopover = ({
     },
     onError: (error) => {
       toast.error(error);
-      // proModal.onOpen();
+      proModal.onOpen();
     },
   });
 

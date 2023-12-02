@@ -1,19 +1,19 @@
-import { OrganizationSwitcher, auth } from '@clerk/nextjs';
 import React, { Suspense } from 'react'
 import Info from './_components/info';
 import { Separator } from '@/components/ui/separator';
 import BoardList from './_components/board-list';
+import { checkSubscription } from '@/lib/subscription';
 
 type Props = {}
 
-const OrganizationIdPage = (props: Props) => {
+const OrganizationIdPage = async (props: Props) => {
 
-    const { userId, orgId } = auth();
 
+    const isPro = await checkSubscription();
 
   return (
     <div className="w-full mb-20">
-    <Info isPro={false} />
+    <Info isPro={isPro} />
     <Separator className="my-4" />
     <div className="px-2 md:px-4">
       <Suspense fallback={<BoardList.Skeleton />}>
