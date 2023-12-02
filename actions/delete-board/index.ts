@@ -12,6 +12,7 @@ import { InputType, ReturnType } from "./types";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { decreaseAvailableCount } from "@/lib/org-limit";
+import { checkSubscription } from "@/lib/subscription";
 // import { checkSubscription } from "@/lib/subscription";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
@@ -23,7 +24,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-//   const isPro = await checkSubscription();
+  const isPro = await checkSubscription();
 
   const { id } = data;
   let board;
@@ -36,7 +37,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    if (/*!isPro*/ true) {
+    if (!isPro) {
       await decreaseAvailableCount();
     }
 
